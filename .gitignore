@@ -1,0 +1,6 @@
+*.DS_Store
+.idea
+.try
+.vscode/
+__pycache__/
+.ropeproject
