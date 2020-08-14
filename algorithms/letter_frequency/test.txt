@@ -1,0 +1,29 @@
+abcdefghijklmnopqrstuvwxyz
+0123456789
+!@#$%^&*()_+-=[]{};:'",<.>/?`~
+
+aaaa aaaa aaaa aaaa aaaa aaaaa
+bbbb bbbb bbbb bbbb bbbb bbbb
+cccc cccc cccc cccc cccc ccc
+dddd dddd dddd dddd dddd dd
+eeee eeee eeee eeee eeee e
+ffff ffff ffff ffff ffff
+gggg gggg gggg gggg ggg
+hhhh hhhh hhhh hhhh hh
+iiii iiii iiii iiii i
+jjjj jjjj jjjj jjjj
+kkkk kkkk kkkk kkk
+llll llll llll ll
+mmmm mmmm mmmm m
+nnnn nnnn nnnn
+oooo oooo ooo
+pppp pppp pp
+qqqq qqqq q
+rrrr rrrr
+ssss sss
+tttt tt
+uuuu u
+vvvv
+www
+xx
+y
