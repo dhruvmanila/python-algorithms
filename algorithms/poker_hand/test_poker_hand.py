@@ -1,5 +1,5 @@
 import pytest
-from poker_hand import PokerHand
+from .poker_hand import PokerHand
 from random import randrange, shuffle
 from itertools import chain
 

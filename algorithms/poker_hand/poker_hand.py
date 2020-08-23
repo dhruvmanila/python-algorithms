@@ -262,3 +262,6 @@ class PokerHand(object):
             raise TypeError("Comparison can only be made to objects of same "
                             "type.")
         return self.compare_with(other) == 'Tie'
+
+    def __hash__(self):
+        return object.__hash__(self)
