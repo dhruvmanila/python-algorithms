@@ -48,6 +48,7 @@ Total letter count: 2521532
 import re
 import pprint
 from typing import Tuple, Dict
+from operator import itemgetter
 
 
 def letter_frequency(fhand) -> Tuple[Dict[str, Tuple[int, float]], int]:
@@ -70,14 +71,14 @@ def letter_frequency(fhand) -> Tuple[Dict[str, Tuple[int, float]], int]:
     letter_freq_sort = {
         let: (val, round(val / total_val * 100, 3))
         for let, val in sorted(
-            letter_dict.items(), key=lambda item: item[1], reverse=True
+            letter_dict.items(), key=itemgetter(1), reverse=True
         )
     }
 
     return letter_freq_sort, total_val
 
 
-def main(file=None):
+def main(file: str = None):
     """
     Find letter frequency from a given file
     https://wikipedia.org/wiki/Letter_frequencies.
@@ -92,7 +93,6 @@ def main(file=None):
             letter_freq, total = letter_frequency(file_hand)
             pprint.pp(letter_freq, indent=4)
             print(f"\nTotal letter count: {total}\n")
-
     except OSError as err:
         print(err)
 
@@ -101,19 +101,20 @@ if __name__ == "__main__":
     import sys
     import os
 
+    file = None
+
     try:
         file = sys.argv[1]
         filepath = os.path.join(os.getcwd(), file)
         if os.path.isfile(filepath):
-            main(file)
+            main(filepath)
         else:
-            raise FileNotFoundError("File not found. Please make sure the file "
-                "is in the same directory as this python script.")
+            raise FileNotFoundError("File not found. Please make sure the file is "
+                                    "in the same directory as this python script.")
     except FileNotFoundError as err:
-        print("Error:",err)
+        print("Error:", err)
     except IndexError:
         print("Usage: python3 letter_frequency.py <filename>")
-        file = None
 
     if not file:
         main()
