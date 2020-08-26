@@ -60,13 +60,15 @@ def letter_frequency(fhand) -> Tuple[Dict[str, Tuple[int, float]], int]:
     returns dictionary (str -> int)
     """
     letter_dict = {}
-    total_val = 0
+    letter_dict_get = letter_dict.get
+    letters = re.compile(r'[a-z]')
 
     for line in fhand:
-        letter_list = re.findall("[a-z]", line.lower())
+        letter_list = letters.findall(line.lower())
         for letter in letter_list:
-            letter_dict[letter] = letter_dict.get(letter, 0) + 1
-            total_val += 1
+            letter_dict[letter] = letter_dict_get(letter, 0) + 1
+
+    total_val = sum(list(letter_dict.values()))
 
     letter_freq_sort = {
         let: (val, round(val / total_val * 100, 3))
