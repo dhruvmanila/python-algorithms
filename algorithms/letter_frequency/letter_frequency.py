@@ -91,7 +91,7 @@ def main(file: str = None):
         file_name = file
 
     try:
-        with open(file_name) as file_hand:
+        with open(file_name, encoding='utf-8') as file_hand:
             letter_freq, total = letter_frequency(file_hand)
             pprint.pp(letter_freq, indent=4)
             print(f"\nTotal letter count: {total}\n")
