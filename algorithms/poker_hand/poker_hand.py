@@ -79,8 +79,8 @@ class PokerHand(object):
         self._second_pair = 0
         self._cards = self._internal_state()
         self._hand_value = self._total_hand_value()
-        self._hand_type = self._hand_type()
-        self._high_card = self._high_card()
+        self._hand_type = self._get_hand_type()
+        self._high_card = self._get_high_card()
 
     @property
     def hand(self):
@@ -176,7 +176,7 @@ class PokerHand(object):
                 return "Win" if self._cards[i][0] > other._cards[i][0] else "Loss"
         return "Tie"
 
-    def _hand_type(self) -> int:
+    def _get_hand_type(self) -> int:
         # Number representing the type of hand internally:
         # 23: Royal flush (Why do I need this?)
         # 22: Straight flush
@@ -199,7 +199,7 @@ class PokerHand(object):
             return 18
         return 14 + self._is_same_kind()
 
-    def _high_card(self) -> int:
+    def _get_high_card(self) -> int:
         return self._cards[-1][0]
 
     def _total_hand_value(self) -> int:
