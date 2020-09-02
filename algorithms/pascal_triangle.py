@@ -119,6 +119,7 @@ def pascal_triangle(n):
 
 def fib_from_pascal(m):
     """Return the mth fibonacci number using Pascal's triangle."""
+
     def fib_pascal(n, fib_pos):
         if n == 1:
             line = [1]
@@ -132,10 +133,11 @@ def fib_from_pascal(m):
             if fib_pos < len(line):
                 fib_sum += line[fib_pos]
         return line, fib_sum
+
     return fib_pascal(m, 0)[1]
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # Usage: python pascal_triangle.py <index>
     import sys
 
@@ -152,4 +154,6 @@ if __name__ == '__main__':
     except ValueError as err:
         print("Error:", err)
     except RecursionError as err:
-        print(f"Error: {err}\nIf you want to go much deeper, increase the recursion limit.")
+        print(
+            f"Error: {err}\nIf you want to go much deeper, increase the recursion limit."
+        )

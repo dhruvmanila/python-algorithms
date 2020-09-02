@@ -43,18 +43,22 @@ def mixed_fraction(fraction: str) -> str:
     if not isinstance(fraction, str):
         raise TypeError("Argument should be of string type of the form: 'x/y'")
 
-    if '/' in fraction:
+    if "/" in fraction:
         try:
-            numerator, denominator = (int(i) for i in fraction.split('/'))
+            numerator, denominator = (int(i) for i in fraction.split("/"))
         except ValueError:
-            raise ValueError("Invalid argument value. Maybe you forgot to "
-                             "add forward slash?") from None
+            raise ValueError(
+                "Invalid argument value. Maybe you forgot to " "add forward slash?"
+            ) from None
 
         if not denominator:
             raise ZeroDivisionError("Denominator cannot be 0.")
 
-        sign = '-' if (numerator > 0 > denominator) or \
-                      (numerator < 0 < denominator) else ''
+        sign = (
+            "-"
+            if (numerator > 0 > denominator) or (numerator < 0 < denominator)
+            else ""
+        )
         num, denom = _irreducible_fraction(abs(numerator), abs(denominator))
         integer, remainder = divmod(num, denom)
 
@@ -68,9 +72,10 @@ def mixed_fraction(fraction: str) -> str:
         return fraction
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # Usage: python mixed_fraction.py <numerator/denominator>
     import sys
+
     result = None
 
     try:
@@ -84,4 +89,3 @@ if __name__ == '__main__':
         frac = input("Enter a fraction of type 'num/denom': ")
         result = mixed_fraction(frac)
         print(f"Mixed fraction: {result}")
-

@@ -61,7 +61,7 @@ def letter_frequency(fhand) -> Tuple[Dict[str, Tuple[int, float]], int]:
     """
     letter_dict = {}
     letter_dict_get = letter_dict.get
-    letters = re.compile(r'[a-z]')
+    letters = re.compile(r"[a-z]")
 
     for line in fhand:
         letter_list = letters.findall(line.lower())
@@ -72,9 +72,7 @@ def letter_frequency(fhand) -> Tuple[Dict[str, Tuple[int, float]], int]:
 
     letter_freq_sort = {
         let: (val, round(val / total_val * 100, 3))
-        for let, val in sorted(
-            letter_dict.items(), key=itemgetter(1), reverse=True
-        )
+        for let, val in sorted(letter_dict.items(), key=itemgetter(1), reverse=True)
     }
 
     return letter_freq_sort, total_val
@@ -91,7 +89,7 @@ def main(file: str = None):
         file_name = file
 
     try:
-        with open(file_name, encoding='utf-8') as file_hand:
+        with open(file_name, encoding="utf-8") as file_hand:
             letter_freq, total = letter_frequency(file_hand)
             pprint.pp(letter_freq, indent=4)
             print(f"\nTotal letter count: {total}\n")
@@ -111,8 +109,10 @@ if __name__ == "__main__":
         if os.path.isfile(filepath):
             main(filepath)
         else:
-            raise FileNotFoundError("File not found. Please make sure the file is "
-                                    "in the same directory as this python script.")
+            raise FileNotFoundError(
+                "File not found. Please make sure the file is "
+                "in the same directory as this python script."
+            )
     except FileNotFoundError as err:
         print("Error:", err)
     except IndexError:

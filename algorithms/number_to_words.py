@@ -64,7 +64,7 @@ WORDS = [
     "sixty",
     "seventy",
     "eighty",
-    "ninety"
+    "ninety",
 ]
 
 
@@ -77,32 +77,52 @@ def number_to_words(n):
     if n < 20:
         return WORDS[n]
     elif n < 100:
-        return WORDS[18 + n // 10] + ('' if n % 10 == 0 else '-' +
-                                                             WORDS[n % 10])
+        return WORDS[18 + n // 10] + ("" if n % 10 == 0 else "-" + WORDS[n % 10])
     elif n < 1_000:
-        return number_to_words(n // 100) + " hundred" + \
-               (' ' + number_to_words(n % 100) if n % 100 > 0 else '')
+        return (
+            number_to_words(n // 100)
+            + " hundred"
+            + (" " + number_to_words(n % 100) if n % 100 > 0 else "")
+        )
     elif n < 1_000_000:
-        return number_to_words(n // 1_000) + " thousand" + \
-               (' ' + number_to_words(n % 1_000) if n % 1_000 > 0 else '')
+        return (
+            number_to_words(n // 1_000)
+            + " thousand"
+            + (" " + number_to_words(n % 1_000) if n % 1_000 > 0 else "")
+        )
     elif n < 1_000_000_000:
-        return number_to_words(n // 1_000_000) + " million" + \
-               (' ' + number_to_words(n % 1_000_000) if n % 1_000_000 > 0
-                else '')
+        return (
+            number_to_words(n // 1_000_000)
+            + " million"
+            + (" " + number_to_words(n % 1_000_000) if n % 1_000_000 > 0 else "")
+        )
     elif n < 1_000_000_000_000:
-        return number_to_words(n // 1_000_000_000) + " billion" + \
-               (' ' + number_to_words(n % 1_000_000_000)
-                if n % 1_000_000_000 > 0 else '')
+        return (
+            number_to_words(n // 1_000_000_000)
+            + " billion"
+            + (
+                " " + number_to_words(n % 1_000_000_000)
+                if n % 1_000_000_000 > 0
+                else ""
+            )
+        )
     elif n < 1_000_000_000_000_000:
-        return number_to_words(n // 1_000_000_000_000) + " trillion" + \
-               (' ' + number_to_words(n % 1_000_000_000_000)
-                if n % 1_000_000_000_000 > 0 else '')
+        return (
+            number_to_words(n // 1_000_000_000_000)
+            + " trillion"
+            + (
+                " " + number_to_words(n % 1_000_000_000_000)
+                if n % 1_000_000_000_000 > 0
+                else ""
+            )
+        )
     else:
         return "Support upto 999,999,999,999,999 (1 less than a quadrillion)"
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     import sys
+
     word = None
 
     try:

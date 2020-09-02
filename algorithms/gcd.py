@@ -64,13 +64,13 @@ def gcd_stein(num1: int, num2: int) -> int:
     a, b = num1, num2
     d = 0
     while a != b:
-        if not(a & 1) and not(b & 1):
+        if not (a & 1) and not (b & 1):
             a //= 2
             b //= 2
             d += 1
-        elif not(a & 1) and (b & 1):
+        elif not (a & 1) and (b & 1):
             a //= 2
-        elif (a & 1) and not(b & 1):
+        elif (a & 1) and not (b & 1):
             b //= 2
         else:
             a, b = max(a, b), min(a, b)
@@ -79,16 +79,12 @@ def gcd_stein(num1: int, num2: int) -> int:
     return gcd
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # Usage: python gcd.py <num1> <num2>
     import sys
 
     # Add your own function here (Only the function name and no quotes).
-    FUNC_DICT = {
-        1: gcd_euclidean,
-        2: gcd_euclidean_mod,
-        3: gcd_stein
-    }
+    FUNC_DICT = {1: gcd_euclidean, 2: gcd_euclidean_mod, 3: gcd_stein}
 
     DEFAULT = 3  # From FUNC_DICT
 

@@ -112,6 +112,7 @@ def possibilities_list(sum_, dice_amount) -> list:
 # TODO: This is extremely basic, going to update it soon
 class LRUCache:
     """Creates a LRUCache object for storing and retrieving values"""
+
     def __init__(self, capacity=128):
         self.cache = OrderedDict()
         self.capacity = capacity
@@ -185,14 +186,14 @@ def possibilities_count(sum_, dice_amount) -> int:
 
 
 # ------------------ making use of all the above functions ------------------
-if __name__ == '__main__':
+if __name__ == "__main__":
     # TODO: Simplify!
     import sys
 
     FUNC_DICT = {
         1: possibilities_list,  # To get the list of all combinations
         2: _possibilities_count,  # For understanding purpose only
-        3: possibilities_count  # Just to get the count [DEFAULT]
+        3: possibilities_count,  # Just to get the count [DEFAULT]
     }
 
     DEFAULT = 3  # DON'T USE THIS
@@ -201,22 +202,25 @@ if __name__ == '__main__':
     try:
         sum_, dice_quant = map(int, sys.argv[1:3])
         if sum_ > (dice_quant * 6):
-            raise Exception(f"Sum cannot be more than {dice_quant * 6} for "
-                            f"{dice_quant} dices.")
+            raise Exception(
+                f"Sum cannot be more than {dice_quant * 6} for " f"{dice_quant} dices."
+            )
 
         poss_count = FUNC_DICT[DEFAULT](sum_, dice_quant)
-        total_poss = 6**dice_quant
+        total_poss = 6 ** dice_quant
         prob = poss_count / total_poss
 
-        print(f"\nPossibilities: {poss_count}\n"
-              f"Total: {total_poss}\n"
-              f"Probability: {prob}\n"
-              f"{FUNC_DICT[DEFAULT].cache_info()}")  # Cache info
+        print(
+            f"\nPossibilities: {poss_count}\n"
+            f"Total: {total_poss}\n"
+            f"Probability: {prob}\n"
+            f"{FUNC_DICT[DEFAULT].cache_info()}"
+        )  # Cache info
 
     except ValueError:
-        print('Usage: python dice_sum_prob.py <sum> <dice quantity>')
+        print("Usage: python dice_sum_prob.py <sum> <dice quantity>")
     except Exception as err:
-        print('Error:', err)
+        print("Error:", err)
 
     if MANUAL:
         try:
@@ -228,12 +232,14 @@ if __name__ == '__main__':
                 pprint(poss_list, indent=4)
             elif MANUAL in [2, 3]:
                 poss_count = FUNC_DICT[MANUAL](sum_, dice_quant)
-                total_poss = 6**dice_quant
+                total_poss = 6 ** dice_quant
                 prob = poss_count / total_poss
 
-                print(f"\nPossibilities: {poss_count}\n"
-                      f"Total: {total_poss}\n"
-                      f"Probability: {prob}")
+                print(
+                    f"\nPossibilities: {poss_count}\n"
+                    f"Total: {total_poss}\n"
+                    f"Probability: {prob}"
+                )
 
                 if MANUAL == 3:
                     print(FUNC_DICT[MANUAL].cache_info())

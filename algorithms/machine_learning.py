@@ -16,7 +16,7 @@ ACTION_LIST = [
     lambda x: 0,
     lambda x: x / 2,
     lambda x: x * 100,
-    lambda x: x % 2
+    lambda x: x % 2,
 ]
 
 
@@ -26,6 +26,7 @@ def get_action_list():
 
 class Machine:
     """Create a machine object which uses reinforcement learning."""
+
     def __init__(self):
         """
         Initialize machine attributes:
@@ -90,9 +91,9 @@ def test_machine():
     print("#1 Should apply the num * 0 action to the command 0")
     try:
         assert test_m1.command(0, random.randint(0, 100)) == 0
-        print('Test PASSED\n')
+        print("Test PASSED\n")
     except AssertionError:
-        print('Test FAILED\n')
+        print("Test FAILED\n")
 
     test_m2 = Machine()
     random.seed()
@@ -101,7 +102,7 @@ def test_machine():
         (1, 100, 0, "#3 Should apply the num * 0 action to the command 1"),
         (2, 100, 50, "#4 Should apply the num / 2 action to the command 2"),
         (3, 1, 100, "#5 Should apply the num * 100 action to the command 3"),
-        (4, 100, 0, "#6 Should apply the num % 2 action to the command 4")
+        (4, 100, 0, "#6 Should apply the num % 2 action to the command 4"),
     ]
 
     # Training machine 2
@@ -116,9 +117,9 @@ def test_machine():
         print(t[3])
         try:
             assert test_return_2 == t[2]
-            print('Test PASSED\n')
+            print("Test PASSED\n")
         except AssertionError:
-            print('Test FAILED\n')
+            print("Test FAILED\n")
 
     print("Random tests")
     for a in range(0, 100):
@@ -140,12 +141,16 @@ def test_machine():
         expected = t[1](t[2])
         try:
             assert output == expected
-            print(f"#{a + 1} PASSED | Expected: {expected} Output: {output} "
-                  f"for cmd {t[0]} to action {t[3]} on {t[2]}")
+            print(
+                f"#{a + 1} PASSED | Expected: {expected} Output: {output} "
+                f"for cmd {t[0]} to action {t[3]} on {t[2]}"
+            )
         except AssertionError:
-            print(f"#{a + 1} FAILED | Expected: {expected} Output: {output} "
-                  f"for cmd {t[0]} to action {t[3]} on {t[2]}")
+            print(
+                f"#{a + 1} FAILED | Expected: {expected} Output: {output} "
+                f"for cmd {t[0]} to action {t[3]} on {t[2]}"
+            )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     test_machine()

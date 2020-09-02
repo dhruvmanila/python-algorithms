@@ -41,91 +41,91 @@ this is a test
 """
 
 encode_morse = {
-    'a': '.-',
-    'b': '-...',
-    'c': '-.-.',
-    'd': '-..',
-    'e': '.',
-    'f': '..-.',
-    'g': '--.',
-    'h': '....',
-    'i': '..',
-    'j': '.---',
-    'k': '-.-',
-    'l': '.-..',
-    'm': '--',
-    'n': '-.',
-    'o': '---',
-    'p': '.--.',
-    'q': '--.-',
-    'r': '.-.',
-    's': '...',
-    't': '-',
-    'u': '..-',
-    'v': '...-',
-    'w': '.--',
-    'x': '-..-',
-    'y': '-.--',
-    'z': '--..',
-    '1': '.----',
-    '2': '...--',
-    '3': '...--',
-    '4': '....-',
-    '5': '.....',
-    '6': '-....',
-    '7': '--...',
-    '8': '---..',
-    '9': '----.',
-    '0': '-----',
-    ',': '--..--',
-    '.': '.-.-.-',
-    '?': '..--..',
-    ';': '-.-.-',
-    ':': '---...',
-    '/': '-..-.',
-    '-': '-....-',
-    "'": '.----.',
-    '(': '-.--.-',
-    ')': '-.--.-',
-    '[': '-.--.-',
-    ']': '-.--.-',
-    '{': '-.--.-',
-    '}': '-.--.-',
-    '_': '..--.-',
-    '+': '.-.-.',
-    '=': '-...-',
-    '&': '.-...',
-    '@': '.--.-.',
-    '!': '-.-.--'
+    "a": ".-",
+    "b": "-...",
+    "c": "-.-.",
+    "d": "-..",
+    "e": ".",
+    "f": "..-.",
+    "g": "--.",
+    "h": "....",
+    "i": "..",
+    "j": ".---",
+    "k": "-.-",
+    "l": ".-..",
+    "m": "--",
+    "n": "-.",
+    "o": "---",
+    "p": ".--.",
+    "q": "--.-",
+    "r": ".-.",
+    "s": "...",
+    "t": "-",
+    "u": "..-",
+    "v": "...-",
+    "w": ".--",
+    "x": "-..-",
+    "y": "-.--",
+    "z": "--..",
+    "1": ".----",
+    "2": "...--",
+    "3": "...--",
+    "4": "....-",
+    "5": ".....",
+    "6": "-....",
+    "7": "--...",
+    "8": "---..",
+    "9": "----.",
+    "0": "-----",
+    ",": "--..--",
+    ".": ".-.-.-",
+    "?": "..--..",
+    ";": "-.-.-",
+    ":": "---...",
+    "/": "-..-.",
+    "-": "-....-",
+    "'": ".----.",
+    "(": "-.--.-",
+    ")": "-.--.-",
+    "[": "-.--.-",
+    "]": "-.--.-",
+    "{": "-.--.-",
+    "}": "-.--.-",
+    "_": "..--.-",
+    "+": ".-.-.",
+    "=": "-...-",
+    "&": ".-...",
+    "@": ".--.-.",
+    "!": "-.-.--",
 }
 
 decode_morse = dict(zip(encode_morse.values(), encode_morse.keys()))
 
 
 def encode_txt(text, key):
-    code = ''
+    code = ""
     for let in text.strip().lower():
-        if let == ' ':
-            code += '   '
+        if let == " ":
+            code += "   "
         else:
-            code += key[let] + ' '
+            code += key[let] + " "
     return code[:-1]
 
 
 def decode_txt(text, key):
-    decode = ''
-    words = text.strip().split('   ')
+    decode = ""
+    words = text.strip().split("   ")
     for word in words:
         for char in word.split():
             decode += key[char]
-        decode += ' '
+        decode += " "
     return decode[:-1]
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     import sys
 
-    MODE = ['encode', 'decode']
+    MODE = ["encode", "decode"]
 
     try:
         mode = sys.argv[1]
@@ -137,10 +137,10 @@ if __name__ == '__main__':
         elif len(msg) > 1:
             raise ValueError("Message entered has to be enclosed within quotes.")
 
-        if mode == 'encode':
+        if mode == "encode":
             encrypt = encode_txt(msg[0], encode_morse)
             print(encrypt)
-        elif mode == 'decode':
+        elif mode == "decode":
             decrypt = decode_txt(msg[0], decode_morse)
             print(decrypt)
 
@@ -150,4 +150,3 @@ if __name__ == '__main__':
         print(f"Error: {err} not in morse code dictionary. Did you mean to encode?")
     except Exception:
         print("Usage: python morse_code.py <encode/decode> <'message'>")
-
