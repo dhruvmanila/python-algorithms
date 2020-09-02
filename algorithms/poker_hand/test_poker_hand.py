@@ -63,11 +63,11 @@ TEST_COMPARE = [
     ("2S 3H 6H 7S 9C", "7H 3C TH 6H 9S", "Loss"),
     ("4S 5H 6H TS AC", "3S 5H 6H TS AC", "Win"),
     ("2S AH 4H 5S 6C", "AD 4C 5H 6H 2C", "Tie"),
-    ("AS AH 3H AD AC", "AS AH 2H AD AC", 'Win'),
-    ("AH AC 5H 5C QS", "AH AC 5H 5C KS", 'Loss'),
-    ("AH AC 5H 5C QS", "KH KC 5H 5C QS", 'Win'),
-    ("7C 7S KH 2H 7H", "3C 3S AH 2H 3H", 'Win'),
-    ("3C 3S AH 2H 3H", "7C 7S KH 2H 7H", 'Loss'),
+    ("AS AH 3H AD AC", "AS AH 2H AD AC", "Win"),
+    ("AH AC 5H 5C QS", "AH AC 5H 5C KS", "Loss"),
+    ("AH AC 5H 5C QS", "KH KC 5H 5C QS", "Win"),
+    ("7C 7S KH 2H 7H", "3C 3S AH 2H 3H", "Win"),
+    ("3C 3S AH 2H 3H", "7C 7S KH 2H 7H", "Loss"),
     ("6H 5H 4H 3H 2H", "5H 4H 3H 2H AH", "Win"),
     ("5H 4H 3H 2H AH", "5H 4H 3H 2H AH", "Tie"),
     ("5H 4H 3H 2H AH", "6H 5H 4H 3H 2H", "Loss"),
@@ -94,12 +94,9 @@ TEST_STRAIGHT = [
 ]
 
 TEST_FIVE_HIGH_STRAIGHT = [
-    ("2H 4D 3C AS 5S", True,
-     [(14, 'S'), (2, 'H'), (3, 'C'), (4, 'D'), (5, 'S')]),
-    ("2H 5D 3C AS 5S", False,
-     [(2, 'H'), (3, 'C'), (5, 'D'), (5, 'S'), (14, 'S')]),
-    ("JH QD KC AS TS", False,
-     [(10, 'S'), (11, 'H'), (12, 'D'), (13, 'C'), (14, 'S')]),
+    ("2H 4D 3C AS 5S", True, [(14, "S"), (2, "H"), (3, "C"), (4, "D"), (5, "S")]),
+    ("2H 5D 3C AS 5S", False, [(2, "H"), (3, "C"), (5, "D"), (5, "S"), (14, "S")]),
+    ("JH QD KC AS TS", False, [(10, "S"), (11, "H"), (12, "D"), (13, "C"), (14, "S")]),
 ]
 
 TEST_KIND = [
@@ -112,7 +109,7 @@ TEST_KIND = [
     ("7C 7S KH 2H 7H", 3),
     ("3C KH 5D 5S KH", 2),
     ("QH 8H KD JH 8S", 1),
-    ("2D 6D 9D TH 7D", 0)
+    ("2D 6D 9D TH 7D", 0),
 ]
 
 TEST_TYPES = [
@@ -125,14 +122,14 @@ TEST_TYPES = [
     ("7C 7S KH 2H 7H", 17),
     ("3C KH 5D 5S KH", 16),
     ("QH 8H KD JH 8S", 15),
-    ("2D 6D 9D TH 7D", 14)
+    ("2D 6D 9D TH 7D", 14),
 ]
 
 
 def generate_random_hands():
     N_RANDOM_TESTS = 1000
     RANDOM_TESTS = []
-    for i in range(N_RANDOM_TESTS):
+    for _ in range(N_RANDOM_TESTS):
         play, oppo = randrange(len(SORTED_HANDS)), randrange(len(SORTED_HANDS))
         expected = ["Loss", "Tie", "Win"][(play >= oppo) + (play > oppo)]
         hand, other = SORTED_HANDS[play], SORTED_HANDS[oppo]
@@ -140,44 +137,44 @@ def generate_random_hands():
     return RANDOM_TESTS
 
 
-@pytest.mark.parametrize('hand, expected', TEST_FLUSH)
+@pytest.mark.parametrize("hand, expected", TEST_FLUSH)
 def test_hand_is_flush(hand, expected):
     player = PokerHand(hand)
     assert player._is_flush() == expected
 
 
-@pytest.mark.parametrize('hand, expected', TEST_STRAIGHT)
+@pytest.mark.parametrize("hand, expected", TEST_STRAIGHT)
 def test_hand_is_straight(hand, expected):
     player = PokerHand(hand)
     assert player._is_straight() == expected
 
 
-@pytest.mark.parametrize('hand, expected, cards', TEST_FIVE_HIGH_STRAIGHT)
+@pytest.mark.parametrize("hand, expected, cards", TEST_FIVE_HIGH_STRAIGHT)
 def test_hand_is_five_high_straight(hand, expected, cards):
     player = PokerHand(hand)
     assert player._is_five_high_straight() == expected
     assert player._cards == cards
 
 
-@pytest.mark.parametrize('hand, expected', TEST_KIND)
+@pytest.mark.parametrize("hand, expected", TEST_KIND)
 def test_hand_is_same_kind(hand, expected):
     player = PokerHand(hand)
     assert player._is_same_kind() == expected
 
 
-@pytest.mark.parametrize('hand, expected', TEST_TYPES)
+@pytest.mark.parametrize("hand, expected", TEST_TYPES)
 def test_hand_values(hand, expected):
     player = PokerHand(hand)
     assert player._hand_type == expected
 
 
-@pytest.mark.parametrize('hand, other, expected', TEST_COMPARE)
+@pytest.mark.parametrize("hand, other, expected", TEST_COMPARE)
 def test_compare_simple(hand, other, expected):
     player, opponent = PokerHand(hand), PokerHand(other)
     assert player.compare_with(opponent) == expected
 
 
-@pytest.mark.parametrize('hand, other, expected', generate_random_hands())
+@pytest.mark.parametrize("hand, other, expected", generate_random_hands())
 def test_compare_random(hand, other, expected):
     player, opponent = PokerHand(hand), PokerHand(other)
     assert player.compare_with(opponent) == expected
@@ -209,12 +206,12 @@ def _test_euler_project():
     """Problem number 54 from Project Euler
     Testing from poker_hands.txt file."""
     ans = 0
-    with open('poker_hands.txt') as fhand:
+    with open("poker_hands.txt") as fhand:
         for line in fhand:
             phand = line[:14]
             ohand = line[15:29]  # To avoid striping the newline
             player, opponent = PokerHand(phand), PokerHand(ohand)
             output = player.compare_with(opponent)
-            if output == 'Win':
+            if output == "Win":
                 ans += 1
     assert ans == 376

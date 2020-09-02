@@ -24,12 +24,37 @@ class PokerHand(object):
     Supported operators:
         Rich comparison operators: <, >, <=, >=, ==
     """
-    _HAND_NAME = ['High card', 'One pair', 'Two pairs', 'Three of a kind',
-                  'Straight', 'Flush', 'Full house', 'Four of a kind',
-                  'Straight flush', 'Royal flush']
 
-    _CARD_NAME = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven',
-                  'Eight', 'Nine', 'Ten', 'Jack', 'Queen', 'King', 'Ace']
+    _HAND_NAME = [
+        "High card",
+        "One pair",
+        "Two pairs",
+        "Three of a kind",
+        "Straight",
+        "Flush",
+        "Full house",
+        "Four of a kind",
+        "Straight flush",
+        "Royal flush",
+    ]
+
+    _CARD_NAME = [
+        "",
+        "One",
+        "Two",
+        "Three",
+        "Four",
+        "Five",
+        "Six",
+        "Seven",
+        "Eight",
+        "Nine",
+        "Ten",
+        "Jack",
+        "Queen",
+        "King",
+        "Ace",
+    ]
 
     def __init__(self, hand: str):
         """
@@ -97,15 +122,15 @@ class PokerHand(object):
         # 16: Two pairs
         # 15: One pair
         if self._hand_type > other._hand_type:
-            return 'Win'
+            return "Win"
         elif self._hand_type < other._hand_type:
-            return 'Loss'
+            return "Loss"
         elif self._first_pair == other._first_pair:
             if self._second_pair == other._second_pair:
                 return self._compare_cards(other)
             else:
-                return 'Win' if self._second_pair > other._second_pair else 'Loss'
-        return 'Win' if self._first_pair > other._first_pair else 'Loss'
+                return "Win" if self._second_pair > other._second_pair else "Loss"
+        return "Win" if self._first_pair > other._first_pair else "Loss"
 
     def hand_name(self) -> str:
         """
@@ -133,24 +158,23 @@ class PokerHand(object):
         pair1 = PokerHand._CARD_NAME[self._first_pair]
         pair2 = PokerHand._CARD_NAME[self._second_pair]
         if self._hand_type in [22, 19, 18]:
-            return name + f', {high}-high'
+            return name + f", {high}-high"
         elif self._hand_type in [21, 17, 15]:
-            return name + f', {pair1}s'
+            return name + f", {pair1}s"
         elif self._hand_type in [20, 16]:
-            join = 'over' if self._hand_type == 20 else 'and'
-            return name + f', {pair1}s {join} {pair2}s'
+            join = "over" if self._hand_type == 20 else "and"
+            return name + f", {pair1}s {join} {pair2}s"
         elif self._hand_type == 23:
             return name
         else:
-            return name + f', {high}'
+            return name + f", {high}"
 
     def _compare_cards(self, other: PokerHand) -> str:
         # Comparing in reverse order as they're sorted
         for i in range(4, -1, -1):
             if self._cards[i][0] != other._cards[i][0]:
-                return 'Win' if self._cards[i][0] > other._cards[i][
-                    0] else 'Loss'
-        return 'Tie'
+                return "Win" if self._cards[i][0] > other._cards[i][0] else "Loss"
+        return "Tie"
 
     def _hand_type(self) -> int:
         # Number representing the type of hand internally:
@@ -239,7 +263,7 @@ class PokerHand(object):
     def _internal_state(self) -> List[Tuple[int, str]]:
         # Internal representation of hand as a two tuple consisting of
         # the value and suit of the card.
-        trans = {'T': '10', 'J': '11', 'Q': '12', 'K': '13', 'A': '14'}
+        trans = {"T": "10", "J": "11", "Q": "12", "K": "13", "A": "14"}
         new_hand = self._hand.translate(str.maketrans(trans)).split()
         final_hand = [(int(card[:-1]), card[-1]) for card in new_hand]
         return sorted(final_hand)
@@ -253,12 +277,12 @@ class PokerHand(object):
     # Rich comparison operators
     def __eq__(self, other):
         if isinstance(other, PokerHand):
-            return self.compare_with(other) == 'Tie'
+            return self.compare_with(other) == "Tie"
         return NotImplemented
 
     def __lt__(self, other):
         if isinstance(other, PokerHand):
-            return self.compare_with(other) == 'Loss'
+            return self.compare_with(other) == "Loss"
         return NotImplemented
 
     def __le__(self, other):
