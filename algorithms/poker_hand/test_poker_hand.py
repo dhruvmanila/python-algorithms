@@ -103,6 +103,7 @@ TEST_FIVE_HIGH_STRAIGHT = [
     ("2H 4D 3C AS 5S", True, [(14, "S"), (2, "H"), (3, "C"), (4, "D"), (5, "S")]),
     ("2H 5D 3C AS 5S", False, [(2, "H"), (3, "C"), (5, "D"), (5, "S"), (14, "S")]),
     ("JH QD KC AS TS", False, [(10, "S"), (11, "H"), (12, "D"), (13, "C"), (14, "S")]),
+    ("9D 3S 2C 7S 7C", False, [(2, "C"), (3, "S"), (7, "C"), (7, "S"), (9, "D")]),
 ]
 
 TEST_KIND = [
