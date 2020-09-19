@@ -1,4 +1,3 @@
-from __future__ import annotations
 from typing import Tuple, List
 from operator import itemgetter
 
@@ -73,12 +72,14 @@ class PokerHand(object):
         """
         # TODO: Input checking
         if not isinstance(hand, str):
-            raise TypeError("Hand should be of str type.")
+            raise TypeError("Hand should be of type 'str'")
+        if len(hand.split(" ")) != 5:
+            raise ValueError("Hand should contain only 5 cards")
         self._hand = hand
         self._first_pair = 0
         self._second_pair = 0
         self._cards = self._internal_state()
-        self._hand_value = self._total_hand_value()
+        self._card_values = self._card_value_list()
         self._hand_type = self._get_hand_type()
         self._high_card = self._get_high_card()
 
@@ -87,7 +88,7 @@ class PokerHand(object):
         """Returns the self hand"""
         return self._hand
 
-    def compare_with(self, other: PokerHand) -> str:
+    def compare_with(self, other: "PokerHand") -> str:
         """
         Determines the outcome of comparing self hand with other hand.
         Returns the output as 'Win', 'Loss', 'Tie' according to the rules of
@@ -169,7 +170,7 @@ class PokerHand(object):
         else:
             return name + f", {high}"
 
-    def _compare_cards(self, other: PokerHand) -> str:
+    def _compare_cards(self, other: "PokerHand") -> str:
         # Comparing in reverse order as they're sorted
         for i in range(4, -1, -1):
             if self._cards[i][0] != other._cards[i][0]:
@@ -190,7 +191,7 @@ class PokerHand(object):
         # 14: High card
         if self._is_flush():
             if self._is_five_high_straight() or self._is_straight():
-                if self._hand_value == 60:
+                if sum(self._card_values) == 60:
                     return 23
                 else:
                     return 22
@@ -202,8 +203,8 @@ class PokerHand(object):
     def _get_high_card(self) -> int:
         return self._cards[-1][0]
 
-    def _total_hand_value(self) -> int:
-        return sum(map(itemgetter(0), self._cards))
+    def _card_value_list(self) -> list:
+        return list(map(itemgetter(0), self._cards))
 
     def _is_flush(self) -> bool:
         suit = self._cards[0][-1]
@@ -213,7 +214,7 @@ class PokerHand(object):
         # If a card is a five high straight (low ace) change the location of
         # ace from the end of the list to the start. Check whether the last
         # element is ace or not. (Don't want to change again)
-        if self._hand_value == 28:
+        if self._card_values == [2, 3, 4, 5, 14]:
             if self._cards[-1][0] == 14:
                 ace_card = self._cards.pop()
                 self._cards.insert(0, ace_card)
@@ -252,9 +253,7 @@ class PokerHand(object):
         second = min(val1, val2)
         # If it's full house, make sure first pair is three count and if not
         # then switch them both.
-        if kind == 6:
-            values = list(map(itemgetter(0), self._cards))
-            if values.count(first) != 3:
+        if kind == 6 and self._card_values.count(first) != 3:
                 first, second = second, first
         self._first_pair = first
         self._second_pair = second

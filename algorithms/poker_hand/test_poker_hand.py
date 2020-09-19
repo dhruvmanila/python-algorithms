@@ -74,6 +74,12 @@ TEST_COMPARE = [
     ("AH AD KS KC AC", "AH KD KH AC KC", "Win"),
     ("2H 4D 3C AS 5S", "2H 4D 3C 6S 5S", "Loss"),
     ("2H 3S 3C 3H 2S", "3S 3C 2S 2H 2D", "Win"),
+    ("4D 6D 5D 2D JH", "3S 8S 3H TC KH", "Loss"),
+    ("4S 6C 8S 3S 7S", "AD KS 2D 7D 7C", "Loss"),
+    ("6S 4C 7H 8C 3H", "5H JC AH 9D 9C", "Loss"),
+    ("9D 9H JH TC QH", "3C 2S JS 5C 7H", "Win"),
+    ("2H TC 8S AD 9S", "4H TS 7H 2C 5C", "Win"),
+    ("9D 3S 2C 7S 7C", "JC TD 3C TC 9H", "Loss"),
 ]
 
 TEST_FLUSH = [
@@ -202,7 +208,7 @@ def _test_hand_name():
         print(player.hand_name())
 
 
-def _test_euler_project():
+def test_euler_project():
     """Problem number 54 from Project Euler
     Testing from poker_hands.txt file."""
     ans = 0
@@ -213,5 +219,7 @@ def _test_euler_project():
             player, opponent = PokerHand(phand), PokerHand(ohand)
             output = player.compare_with(opponent)
             if output == "Win":
+                print(line.strip())
                 ans += 1
     assert ans == 376
+
