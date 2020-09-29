@@ -45,10 +45,10 @@ $ python letter_frequency.py warandpeace.txt
 
 Total letter count: 2521532
 """
-import re
 import pprint
-from typing import Tuple, Dict
+import re
 from operator import itemgetter
+from typing import Dict, Tuple
 
 
 def letter_frequency(fhand) -> Tuple[Dict[str, Tuple[int, float]], int]:
@@ -98,8 +98,8 @@ def main(file: str = None):
 
 
 if __name__ == "__main__":
-    import sys
     import os
+    import sys
 
     file = None
 

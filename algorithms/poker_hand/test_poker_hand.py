@@ -1,7 +1,10 @@
-import pytest
-from .poker_hand import PokerHand
-from random import randrange, shuffle
+import os
 from itertools import chain
+from random import randrange, shuffle
+
+import pytest
+
+from .poker_hand import PokerHand
 
 SORTED_HANDS = [
     "4S 3H 2C 7S 5H",
@@ -213,7 +216,9 @@ def test_euler_project():
     """Problem number 54 from Project Euler
     Testing from poker_hands.txt file."""
     ans = 0
-    with open("poker_hands.txt") as fhand:
+    script_dir = os.path.abspath(os.path.dirname(__file__))
+    poker_hands = os.path.join(script_dir, "poker_hands.txt")
+    with open(poker_hands, "r") as fhand:
         for line in fhand:
             phand = line[:14]
             ohand = line[15:29]  # To avoid striping the newline
@@ -223,4 +228,3 @@ def test_euler_project():
                 print(line.strip())
                 ans += 1
     assert ans == 376
-

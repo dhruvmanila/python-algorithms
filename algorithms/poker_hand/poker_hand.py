@@ -1,5 +1,5 @@
-from typing import Tuple, List
 from operator import itemgetter
+from typing import List, Tuple
 
 
 class PokerHand(object):
@@ -208,7 +208,7 @@ class PokerHand(object):
 
     def _is_flush(self) -> bool:
         suit = self._cards[0][-1]
-        return all(map(lambda card: suit in card, self._cards))
+        return all(suit in card for card in self._cards)
 
     def _is_five_high_straight(self) -> bool:
         # If a card is a five high straight (low ace) change the location of
@@ -254,7 +254,7 @@ class PokerHand(object):
         # If it's full house, make sure first pair is three count and if not
         # then switch them both.
         if kind == 6 and self._card_values.count(first) != 3:
-                first, second = second, first
+            first, second = second, first
         self._first_pair = first
         self._second_pair = second
         return kind

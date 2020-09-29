@@ -79,8 +79,8 @@ Enter the number of dice(s): 3
 NOTE: maxsize for the cache is None (infinite) for count function (3) but don't
 keep it None for the list function (1) unless you have a large memory size :)
 """
-from functools import lru_cache
 from collections import OrderedDict
+from functools import lru_cache
 from pprint import pprint
 
 
